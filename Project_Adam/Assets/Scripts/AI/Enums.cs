@@ -1,22 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+ namespace AI
+{
+    public enum TickResult
+    {
+        Running,
+        Ended,
+    }
+    public enum ActionStatus
+    {
+        Ready,
+        Running,
+    }
 
-public enum TickResult 
+}
+
+public enum FourDirection
 {
     None,
-    Running,
-    Ended,
-}
-public enum FourDir
-{
-    Noned,
     Up,
     Down,
     Left,
     Right,
 }
-public enum EightDir
+public enum EightDirection
 {
     None,
     Up,
@@ -28,7 +36,7 @@ public enum EightDir
     DownLeft,
     DownRight,
 }
-public enum SixDir
+public enum SixDirection
 {
     None,
     Up,
@@ -37,4 +45,23 @@ public enum SixDir
     Right,
     Foward,
     Backward,
+}
+public enum NumCompare
+{
+    LessThan,
+    LessEqualThan,
+    GreaterThan,
+    GreaterEqualThan,
+    EqualTo,
+    NotEqualTo,
+}
+public enum NullCompare
+{
+    IsNull,
+    NotNull,
+}
+public enum EqualCompare
+{
+    Equal,
+    NotEqual,
 }

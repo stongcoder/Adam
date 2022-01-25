@@ -4,7 +4,7 @@ using UnityEngine;
 namespace AI
 {
     [System.Serializable]
-    public class Database
+    public class Database:MonoBehaviour
     {
         [SerializeField,DisplayOnly]
         private SerializableDictionary<string, System.Object> _data;
