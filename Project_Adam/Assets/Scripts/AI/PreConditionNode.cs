@@ -23,18 +23,18 @@ namespace AI
 
     public abstract class PreConditionUseDB : PreConditionNode
     {
-        protected string _dataToCheck;
+        protected string dataToCheck;
         public PreConditionUseDB(string dataToCheck)
         {
-            this._dataToCheck= dataToCheck;
+            this.dataToCheck= dataToCheck;
         }
         
     }
 
     public class PreConditionFloat:PreConditionUseDB
     {
-        public float cmpVal;
-        public NumCompare cmp;
+        private float cmpVal;
+        private NumCompare cmp;
         public PreConditionFloat(string dataToCheck,float cmpVal,NumCompare cmp) : base(dataToCheck) 
         {
             this.cmpVal= cmpVal;
@@ -42,7 +42,7 @@ namespace AI
         }
         public override bool Check()
         {
-            var val=database.GetData<float>(_dataToCheck);
+            var val=database.GetData<float>(dataToCheck);
             bool flag = false;
             switch (cmp)
             {
@@ -82,8 +82,8 @@ namespace AI
     }
     public class PreConditionBool : PreConditionUseDB
     {
-        public bool cmpVal;
-        public EqualCompare cmp;
+        private bool cmpVal;
+        private EqualCompare cmp;
         public PreConditionBool(string dataToCheck,bool cmpVal,EqualCompare cmp) : base(dataToCheck)
         {
             this.cmpVal = cmpVal;
@@ -91,7 +91,7 @@ namespace AI
         }
         public override bool Check()
         {
-            var val= database.GetData<bool>(_dataToCheck);
+            var val= database.GetData<bool>(dataToCheck);
             var flag = false;
             switch (cmp)
             {
@@ -118,7 +118,7 @@ namespace AI
         }
         public override bool Check()
         {
-            System.Object val= database.GetData<System.Object>(_dataToCheck);
+            System.Object val= database.GetData<System.Object>(dataToCheck);
             bool flag = false;
             switch (cmp)
             {

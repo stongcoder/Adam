@@ -27,8 +27,8 @@ public class SerializableDictionary<TKey, TValue> :
     }
     [SerializeField] 
     private List<SerializableKeyValuePair> list = new List<SerializableKeyValuePair>();
-    private Dictionary<TKey, int> KeyPositions => _keyPositions.Value;
-    private Lazy<Dictionary<TKey, int>> _keyPositions;
+    private Dictionary<TKey, int> KeyPositions => keyPositions.Value;
+    private Lazy<Dictionary<TKey, int>> keyPositions;
     private Dictionary<TKey, int> MakeKeyPositions()
     {
         var dictionary = new Dictionary<TKey, int>(list.Count);
@@ -40,13 +40,13 @@ public class SerializableDictionary<TKey, TValue> :
     }
     public SerializableDictionary()
     {
-        _keyPositions = new Lazy<Dictionary<TKey, int>>(MakeKeyPositions);
+        keyPositions = new Lazy<Dictionary<TKey, int>>(MakeKeyPositions);
     }
     public void OnBeforeSerialize() { }
 
     public void OnAfterDeserialize()
     {
-        _keyPositions = new Lazy<Dictionary<TKey, int>>(MakeKeyPositions);
+        keyPositions = new Lazy<Dictionary<TKey, int>>(MakeKeyPositions);
     }
 
     #region IDictionary<TKey, TValue>

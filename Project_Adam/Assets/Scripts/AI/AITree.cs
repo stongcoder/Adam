@@ -8,19 +8,19 @@ namespace AI
         [HideInInspector]
         public Database database;
         [HideInInspector]
-        public bool isRunning;
-        protected BaseNode _root;
+        public Transform trans;
+        protected BaseNode root;
         private void Awake()
         {
+            trans= transform;
             Init();
-            _root.Init(database);
+            root.Init(this);
         }
         private void Update()
         {
-            if (!isRunning) return;
-            if (_root.Evaluate())
+            if (root.Evaluate())
             {
-                _root.Tick();
+                root.Tick();
             }
         }
         protected virtual void Init()
@@ -33,11 +33,11 @@ namespace AI
         }
         protected void Reset()
         {
-            _root?.Clear();
+            root?.Clear();
         }
         private void OnDestroy()
         {
-            _root?.Clear();
+            root?.Clear();
         }
     }
     

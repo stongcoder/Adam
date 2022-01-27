@@ -28,9 +28,10 @@ namespace AI
                 if (child.Evaluate())
                 {
                    var temp= child.Tick();
-                    if (temp == TickResult.Running)
+                    if (temp == TickResult.Ended)
                     {
                         result = temp;
+                        break;
                     }
                 }
             }

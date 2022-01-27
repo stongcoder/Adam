@@ -5,15 +5,15 @@ using UnityEngine;
 namespace AI
 {
     public class BaseNode
-    {   
+    {
         public List<BaseNode> children { get; private set; }
         public bool isInit { get; private set; }
-
-        public Database database;
         public PreConditionNode preCondition;
 
+        protected AITree tree;
+        protected Database database{get=>tree.database;}
         [SerializeField]
-        private float _interval = 0f;
+        private float interval = 0f;
 
         private float lastUseTime;
 
@@ -22,16 +22,15 @@ namespace AI
             this.preCondition = precondition;
             isInit = false;
         }
-        public virtual void Init(Database database)
+        public virtual void Init(AITree tree)
         {
             if (isInit) return;
             isInit = true;
-
-            this.database = database;
-            preCondition?.Init(database);
+            this.tree = tree;
+            preCondition?.Init(tree);
             foreach(var child in children)
             {
-                child.Init(database);
+                child.Init(tree);
             }
         }
 
@@ -83,7 +82,7 @@ namespace AI
         protected virtual bool DoEvaluate() { return true; }
         private bool CheckTimer()
         {
-            if (Time.time - lastUseTime > _interval)
+            if (Time.time - lastUseTime > interval)
             {
                 return true;
             }

@@ -5,10 +5,10 @@ namespace AI
 {
     public class ActionNode : BaseNode
     {
-        private ActionStatus _status;
+        private ActionStatus status;
         public ActionNode(PreConditionNode preCondition = null) : base(preCondition)
         {
-            _status = ActionStatus.Ready;
+            status = ActionStatus.Ready;
         }
         protected virtual void Enter()
         {
@@ -26,27 +26,27 @@ namespace AI
         public override void Clear()
         {
             base.Clear();
-            if (_status != ActionStatus.Ready)
+            if (status != ActionStatus.Ready)
             {
                 Exit();
-                _status = ActionStatus.Ready;
+                status = ActionStatus.Ready;
             }
         }
         protected override TickResult DoTick()
         {
             TickResult result = TickResult.Ended;
-            if (_status == ActionStatus.Ready)
+            if (status == ActionStatus.Ready)
             {
                 Enter();
-                _status = ActionStatus.Running;
+                status = ActionStatus.Running;
             }
-            if (_status == ActionStatus.Running)
+            if (status == ActionStatus.Running)
             {
                 result = Execute();
                 if (result != TickResult.Running)
                 {
                     Exit();
-                    _status = ActionStatus.Ready;
+                    status = ActionStatus.Ready;
                 }
             }
             return result;

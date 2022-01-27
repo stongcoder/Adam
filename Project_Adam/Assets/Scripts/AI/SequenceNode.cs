@@ -5,40 +5,40 @@ namespace AI
 {
     public class SequenceNode : BaseNode
     {
-        private int _activeIndex = -1;
+        private int mActiveIndex = -1;
         public SequenceNode(PreConditionNode precondition = null) : base(precondition) { }
         protected override bool DoEvaluate()
         {
             if(Help.IsCollectionEmpty(children))return false;
-            if(_activeIndex == -1)
+            if(mActiveIndex == -1)
             {
                 return children[0].Evaluate();
             }
             else
             {
-                bool result=children[_activeIndex].Evaluate();
+                bool result=children[mActiveIndex].Evaluate();
                 if (!result)
                 {
-                    children[_activeIndex].Clear();
-                    _activeIndex = -1;
+                    children[mActiveIndex].Clear();
+                    mActiveIndex = -1;
                 }
                 return result;
             }
         }
         protected override TickResult DoTick()
         {
-            if (_activeIndex == -1)
+            if (mActiveIndex == -1)
             {
-                _activeIndex = 0;
+                mActiveIndex = 0;
             }
-            var result =children[_activeIndex].Tick();
+            var result =children[mActiveIndex].Tick();
             if (result == TickResult.Ended)
             {
-                children[_activeIndex].Clear();
-                _activeIndex++;
-                if (_activeIndex >= children.Count)
+                children[mActiveIndex].Clear();
+                mActiveIndex++;
+                if (mActiveIndex >= children.Count)
                 {
-                    _activeIndex = -1;
+                    mActiveIndex = -1;
                 }
                 else
                 {
@@ -50,7 +50,7 @@ namespace AI
         public override void Clear()
         {
             base.Clear();
-            _activeIndex = -1;
+            mActiveIndex = -1;
             foreach(var child in children)
             {
                 child.Clear();

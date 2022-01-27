@@ -7,18 +7,18 @@ namespace AI
     public class Database:MonoBehaviour
     {
         [SerializeField,DisplayOnly]
-        private SerializableDictionary<string, System.Object> _data;
+        private SerializableDictionary<string, System.Object> data;
         public Database()
         {
-            _data = new SerializableDictionary<string, object>();
+            data = new SerializableDictionary<string, object>();
         }
         public T GetData<T>(string key)
         {
             if (IsContain(key))
             {
-                if(_data[key] is T)
+                if(data[key] is T)
                 {
-                    return (T)_data[key];
+                    return (T)data[key];
                 }
                 else
                 {
@@ -34,11 +34,11 @@ namespace AI
         }
         public bool IsContain(string key)
         {
-            return _data.ContainsKey(key);   
+            return data.ContainsKey(key);   
         }
         public void SetData(string key,System.Object value)
         {
-            _data[key]=value;
+            data[key]=value;
         }
     }
 }
